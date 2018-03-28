@@ -1,0 +1,134 @@
+/* 改变主题色变量 */
+//$--color-primary: #ff0000;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";
+
+$header-height: 60px;
+
+*{
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+html,
+body,
+.wrapper,
+.aside-menu,
+.main-container {
+    height: 100%;
+}
+
+a{
+    text-decoration: none;
+}
+
+.wrapper{
+    height: 100%;
+}
+
+.top-header {
+    background-color: $--color-primary;
+    height: $header-height;
+}
+
+.logo-text {
+    vertical-align: middle;
+    color: #ffffff;
+    display: inline-block;
+    height: $header-height;
+    line-height:$header-height;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+.header-operations {
+    display: inline-block;
+    float: right;
+    padding-right: 30px;
+    height: 100%;
+}
+
+.header-operations li {
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 10px;
+    margin: 0 10px;
+    line-height: $header-height;
+    cursor: pointer;
+}
+.header-operations a {
+    color: #ffffff;
+    text-decoration: none
+}
+.aside-menu {
+    border-right: 1px solid #e6e6e6;
+    list-style: none;
+    position: relative;
+    height: auto;
+}
+.container-footer {
+    border-top: 1px solid #e6e6e6;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+}
+.aside-menu a{
+    color: rgb(45, 47, 51);
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+.aside-menu-collapse-btn{
+    width: 100%;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+}
+.el-menu {
+    border: none;
+}
+.aside-menu.menu-close{
+    width: auto!important;
+}
+.el-menu--collapse{
+    width: auto;
+}
+.aside-menu .is-active>a {
+    color: #409EFF;
+}
+.search-form-inline {
+    margin-top: 20px;
+    padding-top: 25px;
+    background-color: #f2f2f2;
+    padding-left: 10px;
+}
+.data-table {
+    margin-top: 30px;
+}
+
+// login
+.login-form {
+    border: 1px solid #efefef;
+    margin-top: 30px;
+    padding: 30px 40px;
+    background: #efefef;
+    border-radius: 10px;
+}
+.login-footer {
+    text-align: center;
+}
+.edit-form {
+    margin-top: 20px;
+    padding-top: 25px;
+}
+.edit-form .el-form-item.input {
+    max-width: 400px;
+}
