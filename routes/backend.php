@@ -13,6 +13,8 @@
 */
 Route::get('/', 'IndexController@index')->name('index');
 
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+
 /*// Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
