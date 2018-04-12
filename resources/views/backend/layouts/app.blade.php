@@ -21,7 +21,8 @@
                 <ul class="header-operations">
                     <li><router-link to="/password">修改密码</router-link></li>
                     <li><router-link to="/infomation">修改资料</router-link></li>
-                    <li><router-link to="#">退出</router-link></li>
+                    {{-- <li><a @click.prevent="logout()">退出</a></li> --}}
+                    <li><a href="{{ route('backend.logout') }}">退出</a></li>
                 </ul>
             </el-header>
             <el-container>

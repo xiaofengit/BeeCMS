@@ -16,3 +16,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
 
 mix.js('resources/assets/backend/js/backend.js', 'public/js');
 mix.sass('resources/assets/backend/css/backend.scss', 'public/css');
+
+mix.js('resources/assets/backend/js/login.backend.js', 'public/js');

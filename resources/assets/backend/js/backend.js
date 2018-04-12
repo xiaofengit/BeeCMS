@@ -30,6 +30,10 @@ const app = new Vue({
     methods: {
         menuCollapse: function(event) {
             console.log(111);
+        },
+        logout: function() {
+            console.log('logout');
+            window.location.href = '/backend/logout'
         }
     }
 });

@@ -56,15 +56,12 @@
         methods: {
             submitForm(formName) {
                 if (!this.loading) {
-                    console.log(!this.loading)
                     this.$refs[formName].validate((valid) => {
-                        console.log(valid);
                         if (valid) {
-                            console.log(1);
                             var _v = this;
                             _v.loading = true;
                             // 请求修改密码
-                            axios.post('/backend/reset', _v.form).then(function(response) {
+                            axios.post('/backend/password', _v.form).then(function(response) {
                                 _v.loading = false;
                             })
                             .catch(function(error) {
