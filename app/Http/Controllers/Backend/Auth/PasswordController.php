@@ -13,6 +13,7 @@ class PasswordController extends Controller
      */
     public function reset(Request $request)
     {
+        $this->validate($request, $this->rules(), $this->validationErrorMessages());
         // dump($request->input('old_password'));
         // $this->validate($request, $this->rules(), $this->validationErrorMessages());
         // $user = $this->guard()->user();
@@ -28,8 +29,8 @@ class PasswordController extends Controller
     protected function rules()
     {
         return [
-            'old_password' => 'required|string',
-            'password' => 'required|string|different:old_password|confirmed|min:6',
+            'old_password' => 'required|string|different:password',
+            'password' => 'required|string|confirmed|min:6',
         ];
     }
 
