@@ -6,13 +6,13 @@
         </el-breadcrumb>
 
         <el-form label-width="100px" class="edit-form" :model="form" :rules="rules" ref="passwordform">
-            <el-form-item prop="old_password" class="input" label="旧密码">
+            <el-form-item ref='old_password' prop="old_password" class="input" label="旧密码" :error="''">
                 <el-input v-model="form.old_password" name="old_password" type="password" placeholder=""></el-input>
             </el-form-item>
-            <el-form-item prop="password" class="input" label="新密码">
+            <el-form-item ref='password' prop="password" class="input" label="新密码">
                 <el-input v-model="form.password" name="password" type="password" placeholder=""></el-input>
             </el-form-item>
-            <el-form-item prop="password_confirmation" class="input" label="确认新密码">
+            <el-form-item ref='password_confirmation' prop="password_confirmation" class="input" label="确认新密码">
                 <el-input v-model="form.password_confirmation" name="password_confirmation" type="password" placeholder=""></el-input>
             </el-form-item>
 
@@ -57,14 +57,39 @@
             submitForm(formName) {
                 if (!this.loading) {
                     this.$refs[formName].validate((valid) => {
+                        // console.log(this.$refs[formName])//('old_password'));
+                        // console.log(this.$refs['old_password'].error = '1111asss')//('old_password'));
+                        // this.$refs['old_password'].error = '1111asss'
                         if (valid) {
                             var _v = this;
+                            // console.log(_v.$refs[formName])
                             _v.loading = true;
                             // 请求修改密码
                             axios.post('/backend/password', _v.form).then(function(response) {
                                 _v.loading = false;
                             })
                             .catch(function(error) {
+                                if (error.response) {
+                                    var errors = error.response.data.errors || {};
+                                    console.log(errors);
+                                    switch (error.response.status) {
+                                        case 422:
+                                            // _v.$message.error(error.response.data.message);
+                                            for ( var item in errors) {
+                                                console.log(item)
+                                                console.log(errors[item][0])
+                                                // _v.$refs[item].error = errors[item][0];
+                                                _v.$message.error(errors[item][0]);
+                                                break;
+                                            }
+                                            break;
+                                        default:
+                                            _v.$message.error(error.response.data.message);
+                                            break;
+                                    }
+                                } else {
+                                    _v.$message.error(error.message);
+                                }
                                 _v.loading = false;
                             });
                         }
