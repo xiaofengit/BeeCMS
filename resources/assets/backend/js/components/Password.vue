@@ -57,16 +57,15 @@
             submitForm(formName) {
                 if (!this.loading) {
                     this.$refs[formName].validate((valid) => {
-                        // console.log(this.$refs[formName])//('old_password'));
-                        // console.log(this.$refs['old_password'].error = '1111asss')//('old_password'));
-                        // this.$refs['old_password'].error = '1111asss'
                         if (valid) {
                             var _v = this;
-                            // console.log(_v.$refs[formName])
                             _v.loading = true;
                             // 请求修改密码
                             axios.post('/backend/password', _v.form).then(function(response) {
                                 _v.loading = false;
+                                console.log(response);
+                                _v.$message.success(response.data.message);
+                                _v.$refs[formName].resetFields();
                             })
                             .catch(function(error) {
                                 if (error.response) {
@@ -74,11 +73,7 @@
                                     console.log(errors);
                                     switch (error.response.status) {
                                         case 422:
-                                            // _v.$message.error(error.response.data.message);
                                             for ( var item in errors) {
-                                                console.log(item)
-                                                console.log(errors[item][0])
-                                                // _v.$refs[item].error = errors[item][0];
                                                 _v.$message.error(errors[item][0]);
                                                 break;
                                             }

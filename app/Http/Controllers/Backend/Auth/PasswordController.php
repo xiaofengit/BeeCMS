@@ -16,8 +16,17 @@ class PasswordController extends Controller
      */
     public function reset(Request $request)
     {
-        // var_dump();exit;
         $this->validate($request, $this->rules(), $this->validationErrorMessages());
+
+        $request->user()->fill([
+            'password' => Hash::make($request->input('password'))
+        ]);
+
+        $res = $request->user()->save();
+
+        return $res ? response(['message' => '更新成功'], 200) : response(['message' => '更新失败'], 422);
+
+        // var_dump($request->user());
 
         // $this->validateReset($request);
 

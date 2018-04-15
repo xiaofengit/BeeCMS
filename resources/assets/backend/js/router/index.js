@@ -1,8 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Dashboard from '../components/Dashboard.vue';
+
+import Dashboard from '../components/Dashboard';
 import Password from '../components/Password';
 import Infomation from '../components/Infomation';
+import Admins from '../components/role/Admins';
+
 Vue.use(Router);
 
 // import Index from '../'
@@ -21,6 +24,11 @@ const routes = [
         path: '/infomation',
         name: 'infomation',
         component: Infomation
+    },
+    {
+        path: '/admins',
+        name: 'admins',
+        component: Admins
     }
 ];
 

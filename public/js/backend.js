@@ -76404,12 +76404,17 @@ var app = new Vue({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Dashboard_vue__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Dashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Dashboard_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Dashboard__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Dashboard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Dashboard__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Password__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Password___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Password__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Infomation__ = __webpack_require__(199);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Infomation___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Infomation__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_role_Admins__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_role_Admins___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_role_Admins__);
+
+
+
 
 
 
@@ -76421,7 +76426,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 var routes = [{
     path: '/',
     name: 'Index',
-    component: __WEBPACK_IMPORTED_MODULE_2__components_Dashboard_vue___default.a
+    component: __WEBPACK_IMPORTED_MODULE_2__components_Dashboard___default.a
 }, {
     path: '/password',
     name: 'password',
@@ -76430,6 +76435,10 @@ var routes = [{
     path: '/infomation',
     name: 'infomation',
     component: __WEBPACK_IMPORTED_MODULE_4__components_Infomation___default.a
+}, {
+    path: '/admins',
+    name: 'admins',
+    component: __WEBPACK_IMPORTED_MODULE_5__components_role_Admins___default.a
 }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
@@ -79263,27 +79272,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (!this.loading) {
                 this.$refs[formName].validate(function (valid) {
-                    // console.log(this.$refs[formName])//('old_password'));
-                    // console.log(this.$refs['old_password'].error = '1111asss')//('old_password'));
-                    // this.$refs['old_password'].error = '1111asss'
                     if (valid) {
                         var _v = _this2;
-                        // console.log(_v.$refs[formName])
                         _v.loading = true;
                         // 请求修改密码
                         axios.post('/backend/password', _v.form).then(function (response) {
                             _v.loading = false;
+                            console.log(response);
+                            _v.$message.success(response.data.message);
+                            _v.$refs[formName].resetFields();
                         }).catch(function (error) {
                             if (error.response) {
                                 var errors = error.response.data.errors || {};
                                 console.log(errors);
                                 switch (error.response.status) {
                                     case 422:
-                                        // _v.$message.error(error.response.data.message);
                                         for (var item in errors) {
-                                            console.log(item);
-                                            console.log(errors[item][0]);
-                                            // _v.$refs[item].error = errors[item][0];
                                             _v.$message.error(errors[item][0]);
                                             break;
                                         }
@@ -79687,9 +79691,16 @@ var render = function() {
             _c("span", [_vm._v("权限管理")])
           ]),
           _vm._v(" "),
-          _c("el-menu-item", { attrs: { index: "2-1" } }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("管理员")])
-          ]),
+          _c(
+            "el-menu-item",
+            { attrs: { index: "2-1" } },
+            [
+              _c("router-link", { attrs: { to: "/admins" } }, [
+                _vm._v("管理员")
+              ])
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("el-menu-item", { attrs: { index: "2-2" } }, [
             _c("a", { attrs: { href: "#" } }, [_vm._v("管理员组")])
@@ -79727,6 +79738,459 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-53d4cc88", module.exports)
   }
 }
+
+/***/ }),
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(52)
+/* script */
+var __vue_script__ = __webpack_require__(216)
+/* template */
+var __vue_template__ = __webpack_require__(215)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\backend\\js\\components\\role\\Admins.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7716a37b", Component.options)
+  } else {
+    hotAPI.reload("data-v-7716a37b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 215 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-breadcrumb",
+        { attrs: { "separator-class": "el-icon-arrow-right" } },
+        [
+          _c(
+            "el-breadcrumb-item",
+            [_c("router-link", { attrs: { to: "/" } }, [_vm._v("工作面板")])],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-breadcrumb-item",
+            [
+              _c("router-link", { attrs: { to: "/admins" } }, [
+                _vm._v("权限管理")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("el-breadcrumb-item", [_vm._v("管理员")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-table",
+        {
+          staticClass: "data-table",
+          staticStyle: { width: "100%" },
+          attrs: { data: _vm.tableData, stripe: "" }
+        },
+        [
+          _c("el-table-column", { attrs: { type: "selection" } }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "id", label: "ID", width: "50" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", { attrs: { prop: "name", label: "姓名" } }),
+          _vm._v(" "),
+          _c("el-table-column", { attrs: { prop: "email", label: "邮箱" } }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: {
+              prop: "is_super",
+              label: "超级管理员",
+              formatter: _vm.formatSuper
+            }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: {
+              prop: "is_active",
+              label: "状态",
+              formatter: _vm.formatState
+            }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "created_at", label: "创建时间" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "updated_at", label: "更新时间" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { label: "操作", fixed: "right", "min-width": "150" },
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(scope) {
+                  return [
+                    _c(
+                      "el-button",
+                      {
+                        attrs: { size: "mini" },
+                        on: {
+                          click: function($event) {
+                            _vm.hanldeEdit(scope.$index, scope.row)
+                          }
+                        }
+                      },
+                      [_vm._v("编辑")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "el-button",
+                      {
+                        attrs: {
+                          size: "mini",
+                          type: "danger",
+                          disabled: scope.row.is_super == 1 ? true : false
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.hanldeDelete(scope.$index, scope.row)
+                          }
+                        }
+                      },
+                      [_vm._v("删除")]
+                    )
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "data-table-footer" },
+        [
+          _c(
+            "div",
+            { staticClass: "table-batch" },
+            [
+              _c(
+                "el-select",
+                {
+                  staticStyle: { width: "110px" },
+                  attrs: { placeholder: "批量操作", size: "medium" },
+                  model: {
+                    value: _vm.batchSelected,
+                    callback: function($$v) {
+                      _vm.batchSelected = $$v
+                    },
+                    expression: "batchSelected"
+                  }
+                },
+                _vm._l(_vm.batchOptions, function(item) {
+                  return _c("el-option", {
+                    key: item.value,
+                    attrs: { label: item.label, value: item.value }
+                  })
+                })
+              ),
+              _vm._v(" "),
+              _c("el-button", [_vm._v("确定")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("el-pagination", {
+            staticClass: "table-pagination",
+            attrs: {
+              "current-page": 1,
+              "page-sizes": [10, 20, 50, 100, 200, 300],
+              "page-size": 10,
+              layout: "total, sizes, prev, pager, next",
+              total: 5,
+              background: ""
+            },
+            on: {
+              "size-change": _vm.handleSizeChange,
+              "current-change": _vm.handleCurrentChange
+            }
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7716a37b", module.exports)
+  }
+}
+
+/***/ }),
+/* 216 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			batchOptions: [{
+				value: "disabled",
+				label: "禁用"
+			}, {
+				value: "enable",
+				label: "启用"
+			}],
+			batchSelected: '',
+			tableData: [{
+				id: 1,
+				email: "aa@ss.com",
+				name: "姓名",
+				is_super: 0,
+				is_active: 1,
+				created_at: "",
+				updated_at: ""
+			}, {
+				id: 1,
+				email: "aa@ss.com",
+				name: "姓名",
+				is_super: 1,
+				is_active: 0,
+				created_at: "",
+				updated_at: ""
+			}, {
+				id: 1,
+				email: "aa@ss.com",
+				name: "姓名",
+				is_super: 0,
+				is_active: 1,
+				created_at: "",
+				updated_at: ""
+			}, {
+				id: 1,
+				email: "aa@ss.com",
+				name: "姓名",
+				is_super: 1,
+				is_active: 0,
+				created_at: "",
+				updated_at: ""
+			}, {
+				id: 1,
+				email: "aa@ss.com",
+				name: "姓名",
+				is_super: 0,
+				is_active: 1,
+				created_at: "",
+				updated_at: ""
+			}, {
+				id: 1,
+				email: "aa@ss.com",
+				name: "姓名",
+				is_super: 1,
+				is_active: 0,
+				created_at: "",
+				updated_at: ""
+			}]
+		};
+	},
+
+	methods: {
+		formatSuper: function formatSuper(row, column, cellValue, index) {
+			return cellValue == 1 ? "是" : "否";
+		},
+		formatState: function formatState(row, column, cellValue, index) {
+			return cellValue == 1 ? "激活" : "禁用";
+		},
+		hanldeEdit: function hanldeEdit(index, row) {
+			console.log(index, row);
+		},
+		hanldeDelete: function hanldeDelete(index, row) {
+			var _this = this;
+
+			console.log(index, row);
+			this.$confirm("此操作将永久删除该记录，是否继续？", "提示", {
+				confirmButtonText: "确定",
+				cancelButtonTextt: "取消",
+				type: 'warning'
+			}).then(function () {
+				_this.tableData.splice(index, 1);
+				_this.$message({
+					type: 'success',
+					message: '删除成功!'
+				});
+			}).catch(function () {
+				// this.$message('已取消删除');
+			});
+		},
+		handleSizeChange: function handleSizeChange(val) {
+			console.log("\u6BCF\u9875 " + val + " \u6761");
+		},
+		handleCurrentChange: function handleCurrentChange(val) {
+			console.log("\u5F53\u524D\u9875: " + val);
+		}
+	}
+});
 
 /***/ })
 /******/ ]);
