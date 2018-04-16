@@ -112,7 +112,7 @@ a{
 }
 // table
 .data-table {
-    margin-top: 30px;
+    margin-top: 10px;
 }
 .data-table-footer {
     padding: 12px 0;
@@ -123,6 +123,10 @@ a{
     .table-pagination {
         float: right
     }
+}
+
+.table-button-group {
+    margin-top: 20px;
 }
 
 // login

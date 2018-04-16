@@ -27,7 +27,8 @@
             </el-header>
             <el-container>
                 <el-aside width="210px" class="aside-menu" v-bind:class="{'menu-close':isCollapse}">
-                    <el-button class="aside-menu-collapse-btn" :plain="true" icon="el-icon-menu" @click="isCollapse = !isCollapse"></el-button>
+                    <el-button class="aside-menu-collapse-btn" :plain="true" icon="el-icon-menu" @click="isCollapse = !isCollapse">
+                        <span v-if="!isCollapse">收起菜单</span></el-button>
                     <aside-menu :collapse="isCollapse"></aside-menu>
                 </el-aside>
                 <el-container>

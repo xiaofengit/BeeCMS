@@ -65149,7 +65149,7 @@ a {
 }
 
 .data-table {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .data-table-footer {
@@ -65163,6 +65163,10 @@ a {
 
 .data-table-footer .table-pagination {
   float: right;
+}
+
+.table-button-group {
+  margin-top: 20px;
 }
 
 .login-form {

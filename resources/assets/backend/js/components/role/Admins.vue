@@ -2,16 +2,51 @@
 	<div>
 		<!-- 面包屑 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
-            <el-breadcrumb-item><router-link to="/">工作面板</router-link></el-breadcrumb-item>
-            <el-breadcrumb-item><router-link to="/admins">权限管理</router-link></el-breadcrumb-item>
-            <el-breadcrumb-item>管理员</el-breadcrumb-item>
-        </el-breadcrumb>
+      <el-breadcrumb-item><router-link to="/admins">权限管理</router-link></el-breadcrumb-item>
+      <el-breadcrumb-item>管理员</el-breadcrumb-item>
+    </el-breadcrumb>
 
-        <!-- 数据 -->
+    <!-- 搜索 -->
+    <el-form :model="search" :inline="true" ref="searchForm" :rules="searchRules" class="search-form-inline">
+      <el-form-item prop="name" class="input" label="姓名">
+        <el-input v-model="search.name" type="input" placeholder="请输入姓名"></el-input>
+      </el-form-item>
+      <el-form-item prop="email" class="input" label="邮箱">
+        <el-input v-model="search.email" type="input" placeholder="请输入邮箱"></el-input>
+      </el-form-item>
+      <el-form-item prop="is_active" label="状态">
+        <el-select v-model="search.is_active">
+          <el-option label="全部" value="-1"></el-option>
+          <el-option label="启用" value="1"></el-option>
+          <el-option label="禁用" value="0"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item prop="created_at" class="input" label="创建时间">
+        <el-date-picker
+          v-model="search.created_at"
+          type="datetimerange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期">
+        </el-date-picker>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="handleSearch('searchForm')" v-loading.lock="loading">搜 索</el-button>
+      </el-form-item>
+    </el-form>
+
+    <!-- 操作按钮 -->
+    <el-button-group class="table-button-group">
+      <el-button type="primary" size="mini" icon="el-icon-plus">新 增</el-button>
+      <el-button type="primary" size="mini" icon="el-icon-download">导 出</el-button>
+    </el-button-group>
+
+    <!-- 数据 -->
 		<el-table
 			style="width:100%"
 			:data="tableData"
 			stripe
+      border
 			class="data-table"
 		>
 			<el-table-column
@@ -102,17 +137,15 @@
 	export default {
 		data() {
 			return {
-        batchOptions: [
-          {
-            value: "disabled",
-            label: "禁用",
-          },
-          {
-            value: "enable",
-            label: "启用",
-          }
-        ],
-        batchSelected: '',
+        loading: false,
+        search: {
+          name: "",
+          email: "",
+          created_at: ""
+        },
+        searchRules: {
+          email: {type: "email", message: "请输入正确的邮箱", trigger: "blur"}
+        },
 				tableData: [
 					{
 						id: 1,
@@ -168,7 +201,18 @@
 						created_at: "",
 						updated_at: ""
 					}
-				]
+				],
+        batchOptions: [
+          {
+            value: "disabled",
+            label: "禁用",
+          },
+          {
+            value: "enable",
+            label: "启用",
+          }
+        ],
+        batchSelected: ''
 			}
 		},
 		methods: {
@@ -202,6 +246,9 @@
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+      },
+      handleSearch: function(formName) {
+
       }
 		}
 	}
