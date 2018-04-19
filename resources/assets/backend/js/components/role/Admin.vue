@@ -2,7 +2,7 @@
 	<div>
 		<!-- 面包屑 -->
 		<el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item><router-link to="/admins">权限管理</router-link></el-breadcrumb-item>
+      <el-breadcrumb-item><router-link to="/admin">权限管理</router-link></el-breadcrumb-item>
       <el-breadcrumb-item>管理员</el-breadcrumb-item>
     </el-breadcrumb>
 
@@ -37,7 +37,7 @@
 
     <!-- 操作按钮 -->
     <el-button-group class="table-button-group">
-      <el-button type="primary" size="mini" icon="el-icon-plus">新 增</el-button>
+      <el-button @click="handleCreate()" type="primary" size="mini" icon="el-icon-plus">新 增</el-button>
       <el-button type="primary" size="mini" icon="el-icon-download">导 出</el-button>
     </el-button-group>
 
@@ -224,7 +224,11 @@
 			},
 			hanldeEdit: function(index, row) {
 				console.log(index, row)
+        this.$router.push('/admin/edit/'+row.id);
 			},
+      handleCreate: function() {
+        this.$router.push('/admin/create')
+      },
 			hanldeDelete: function(index, row) {
 				console.log(index, row)
 				this.$confirm("此操作将永久删除该记录，是否继续？", "提示", {

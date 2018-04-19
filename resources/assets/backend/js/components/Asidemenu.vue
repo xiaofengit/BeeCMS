@@ -17,7 +17,7 @@
                 <i class="el-icon-view"></i>
                 <span>权限管理</span>
             </template>
-            <el-menu-item index="2-1"><router-link to="/admins">管理员</router-link></el-menu-item>
+            <el-menu-item index="2-1"><router-link to="/admin">管理员</router-link></el-menu-item>
             <el-menu-item index="2-2"><a href="#">管理员组</a></el-menu-item>
         </el-submenu>
         <el-submenu index="3">

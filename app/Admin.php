@@ -15,7 +15,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'is_active'
     ];
 
     /**
@@ -26,4 +26,11 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * 不能被批量赋值的属性
+     *
+     * @var array
+     */
+    protected $guarded = ['is_super'];
 }

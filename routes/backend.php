@@ -18,7 +18,9 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::post("password", 'Auth\PasswordController@reset');
 
-Route::get('admins', 'Role\AdminController@lists')->name('admins');
+Route::get('admin', 'Role\AdminController@index')->name('admin.index');
+Route::post('admin', 'Role\AdminController@store')->name('admin.store');
+Route::get('admin/{id}', 'Role\AdminController@show')->name('admin.show');
 
 /*// Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
