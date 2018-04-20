@@ -55,7 +55,7 @@
             {type: 'email', message: '请输入正确的邮箱', trigger: 'blur'}
           ],
           password: [
-            {required: true, message: '请输入登录密码', trigger: 'blur'},
+            {required: true, min:6, message: '请输入登录密码', trigger: 'blur'},
           ],
           is_active: [
             {required: true, message: '请选择账号状态', trigger: 'change'},

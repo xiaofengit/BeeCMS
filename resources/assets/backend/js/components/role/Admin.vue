@@ -151,22 +151,22 @@
 						id: 1,
 						email: "aa@ss.com",
 						name: "姓名",
-						is_super: 0,
+						is_super: 1,
 						is_active: 1,
 						created_at: "",
 						updated_at: ""
 					},
 					{
-						id: 1,
+						id: 2,
 						email: "aa@ss.com",
 						name: "姓名",
-						is_super: 1,
+						is_super: 0,
 						is_active: 0,
 						created_at: "",
 						updated_at: ""
 					},
 					{
-						id: 1,
+						id: 3,
 						email: "aa@ss.com",
 						name: "姓名",
 						is_super: 0,
@@ -175,16 +175,16 @@
 						updated_at: ""
 					},
 					{
-						id: 1,
+						id: 4,
 						email: "aa@ss.com",
 						name: "姓名",
-						is_super: 1,
+						is_super: 0,
 						is_active: 0,
 						created_at: "",
 						updated_at: ""
 					},
 					{
-						id: 1,
+						id: 5,
 						email: "aa@ss.com",
 						name: "姓名",
 						is_super: 0,
@@ -193,10 +193,10 @@
 						updated_at: ""
 					},
 					{
-						id: 1,
+						id: 6,
 						email: "aa@ss.com",
 						name: "姓名",
-						is_super: 1,
+						is_super: 0,
 						is_active: 0,
 						created_at: "",
 						updated_at: ""
@@ -230,20 +230,25 @@
         this.$router.push('/admin/create')
       },
 			hanldeDelete: function(index, row) {
-				console.log(index, row)
 				this.$confirm("此操作将永久删除该记录，是否继续？", "提示", {
 					confirmButtonText: "确定",
 					cancelButtonTextt: "取消",
 					type: 'warning'
 				}).then(() => {
-          this.tableData.splice(index, 1)
-					this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-				}).catch(() => {
-					// this.$message('已取消删除');
-				})
+          // 确认删除
+          axios.delete('/backend/admin/'+row.id)
+          .then(res => {
+            this.tableData.splice(index, 1)
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            });
+          })
+          .catch(error => {
+            this.$message.error(error.message);
+          })
+          
+				});
 			},
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
