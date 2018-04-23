@@ -79748,122 +79748,126 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	data: function data() {
-		return {
-			loading: false,
-			search: {
-				name: "",
-				email: "",
-				created_at: ""
-			},
-			searchRules: {
-				email: { type: "email", message: "请输入正确的邮箱", trigger: "blur" }
-			},
-			tableData: [{
-				id: 1,
-				email: "aa@ss.com",
-				name: "姓名",
-				is_super: 1,
-				is_active: 1,
-				created_at: "",
-				updated_at: ""
-			}, {
-				id: 2,
-				email: "aa@ss.com",
-				name: "姓名",
-				is_super: 0,
-				is_active: 0,
-				created_at: "",
-				updated_at: ""
-			}, {
-				id: 3,
-				email: "aa@ss.com",
-				name: "姓名",
-				is_super: 0,
-				is_active: 1,
-				created_at: "",
-				updated_at: ""
-			}, {
-				id: 4,
-				email: "aa@ss.com",
-				name: "姓名",
-				is_super: 0,
-				is_active: 0,
-				created_at: "",
-				updated_at: ""
-			}, {
-				id: 5,
-				email: "aa@ss.com",
-				name: "姓名",
-				is_super: 0,
-				is_active: 1,
-				created_at: "",
-				updated_at: ""
-			}, {
-				id: 6,
-				email: "aa@ss.com",
-				name: "姓名",
-				is_super: 0,
-				is_active: 0,
-				created_at: "",
-				updated_at: ""
-			}],
-			batchOptions: [{
-				value: "disabled",
-				label: "禁用"
-			}, {
-				value: "enable",
-				label: "启用"
-			}],
-			batchSelected: ''
-		};
-	},
+  beforeMount: function beforeMount() {
+    this.getTableData(1);
+  },
+  data: function data() {
+    return {
+      loading: false,
+      search: {
+        name: "",
+        email: "",
+        created_at: ""
+      },
+      searchRules: {
+        email: { type: "email", message: "请输入正确的邮箱", trigger: "blur" }
+      },
+      tableData: [{
+        id: "",
+        email: "",
+        name: "",
+        is_super: "",
+        is_active: "",
+        created_at: "",
+        updated_at: ""
+      }],
+      page: {
+        total: 0,
+        per_page: 10,
+        current_page: 1
+      },
+      batchOptions: [{
+        value: "disabled",
+        label: "禁用"
+      }, {
+        value: "enable",
+        label: "启用"
+      }],
+      batchSelected: ''
+    };
+  },
 
-	methods: {
-		formatSuper: function formatSuper(row, column, cellValue, index) {
-			return cellValue == 1 ? "是" : "否";
-		},
-		formatState: function formatState(row, column, cellValue, index) {
-			return cellValue == 1 ? "激活" : "禁用";
-		},
-		hanldeEdit: function hanldeEdit(index, row) {
-			console.log(index, row);
-			this.$router.push('/admin/edit/' + row.id);
-		},
-		handleCreate: function handleCreate() {
-			this.$router.push('/admin/create');
-		},
-		hanldeDelete: function hanldeDelete(index, row) {
-			var _this = this;
+  methods: {
+    formatSuper: function formatSuper(row, column, cellValue, index) {
+      return cellValue == 1 ? "是" : "否";
+    },
+    formatState: function formatState(row, column, cellValue, index) {
+      return cellValue == 1 ? "激活" : "禁用";
+    },
+    hanldeEdit: function hanldeEdit(index, row) {
+      console.log(index, row);
+      this.$router.push('/admin/edit/' + row.id);
+    },
+    handleCreate: function handleCreate() {
+      this.$router.push('/admin/create');
+    },
+    hanldeDelete: function hanldeDelete(index, row) {
+      var _this = this;
 
-			this.$confirm("此操作将永久删除该记录，是否继续？", "提示", {
-				confirmButtonText: "确定",
-				cancelButtonTextt: "取消",
-				type: 'warning'
-			}).then(function () {
-				// 确认删除
-				axios.delete('/backend/admin/' + row.id).then(function (res) {
-					_this.tableData.splice(index, 1);
-					_this.$message({
-						type: 'success',
-						message: '删除成功!'
-					});
-				}).catch(function (error) {
-					_this.$message.error(error.message);
-				});
-			});
-		},
-		handleSizeChange: function handleSizeChange(val) {
-			console.log("\u6BCF\u9875 " + val + " \u6761");
-		},
-		handleCurrentChange: function handleCurrentChange(val) {
-			console.log("\u5F53\u524D\u9875: " + val);
-		},
+      this.$confirm("此操作将永久删除该记录，是否继续？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonTextt: "取消",
+        type: 'warning'
+      }).then(function () {
+        // 确认删除
+        axios.delete('/backend/admin/' + row.id).then(function (res) {
+          _this.tableData.splice(index, 1);
+          _this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(function (error) {
+          _this.$message.error(error.message);
+        });
+      });
+    },
+    handleSizeChange: function handleSizeChange(val) {
+      console.log("\u6BCF\u9875 " + val + " \u6761");
+      this.$data.page.per_page = val;
+      this.getTableData(this.$data.page.current_page, val);
+    },
+    handleCurrentChange: function handleCurrentChange(val) {
+      console.log("\u5F53\u524D\u9875: " + val);
+      this.$data.page.current_page = val;
+      this.getTableData(val);
+    },
 
-		handleSearch: function handleSearch(formName) {}
-	}
+    handleSearch: function handleSearch(formName) {
+      this.$alert('功能尚未完善');
+    },
+    hanldeBatch: function hanldeBatch() {
+      this.$alert('功能尚未完善');
+    },
+    hanldeExport: function hanldeExport() {
+      this.$alert('功能尚未完善');
+    },
+    getTableData: function getTableData(page, perPage) {
+      var _this2 = this;
+
+      this.$data.loading = true;
+      // 获取列表数据
+      axios.get('/backend/admin', {
+        params: {
+          perpage: perPage || this.$data.page.per_page || 10,
+          page: page || this.$data.page.current_page + 1 || 1
+        }
+      }).then(function (res) {
+        _this2.$data.tableData = res.data.data;
+        _this2.$data.page.total = parseInt(res.data.total);
+        _this2.$data.page.per_page = parseInt(res.data.per_page);
+        _this2.$data.page.current_page = parseInt(res.data.current_page);
+        _this2.$data.loading = false;
+      }).catch(function (error) {
+        _this2.$message.error(error.message);
+        _this2.$data.loading = false;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -80045,7 +80049,16 @@ var render = function() {
           _c(
             "el-button",
             {
-              attrs: { type: "primary", size: "mini", icon: "el-icon-download" }
+              attrs: {
+                type: "primary",
+                size: "mini",
+                icon: "el-icon-download"
+              },
+              on: {
+                click: function($event) {
+                  _vm.hanldeExport()
+                }
+              }
             },
             [_vm._v("导 出")]
           )
@@ -80056,6 +80069,15 @@ var render = function() {
       _c(
         "el-table",
         {
+          directives: [
+            {
+              name: "loading",
+              rawName: "v-loading.lock",
+              value: _vm.loading,
+              expression: "loading",
+              modifiers: { lock: true }
+            }
+          ],
           staticClass: "data-table",
           staticStyle: { width: "100%" },
           attrs: { data: _vm.tableData, stripe: "", border: "" }
@@ -80067,9 +80089,13 @@ var render = function() {
             attrs: { prop: "id", label: "ID", width: "50" }
           }),
           _vm._v(" "),
-          _c("el-table-column", { attrs: { prop: "name", label: "姓名" } }),
+          _c("el-table-column", {
+            attrs: { prop: "name", label: "姓名", width: "150" }
+          }),
           _vm._v(" "),
-          _c("el-table-column", { attrs: { prop: "email", label: "邮箱" } }),
+          _c("el-table-column", {
+            attrs: { prop: "email", label: "邮箱", width: "200" }
+          }),
           _vm._v(" "),
           _c("el-table-column", {
             attrs: {
@@ -80169,7 +80195,17 @@ var render = function() {
                 })
               ),
               _vm._v(" "),
-              _c("el-button", [_vm._v("确定")])
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.hanldeBatch()
+                    }
+                  }
+                },
+                [_vm._v("确定")]
+              )
             ],
             1
           ),
@@ -80177,11 +80213,11 @@ var render = function() {
           _c("el-pagination", {
             staticClass: "table-pagination",
             attrs: {
-              "current-page": 1,
-              "page-sizes": [10, 20, 50, 100, 200, 300],
-              "page-size": 10,
+              "current-page": _vm.page.current_page,
+              "page-sizes": [1, 10, 20, 50, 100, 200, 300],
+              "page-size": _vm.page.per_page,
               layout: "total, sizes, prev, pager, next",
-              total: 5,
+              total: _vm.page.total,
               background: ""
             },
             on: {

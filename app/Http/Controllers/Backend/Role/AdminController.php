@@ -12,9 +12,11 @@ class AdminController extends Controller
     /**
      * 数据列表
      */
-    public function index()
+    public function index(Request $request)
     {
-        $admins = Admin::paginate();
+        // dump($request->perpage);
+        // exit;
+        $admins = Admin::paginate($request->perpage?:10, ['*'], 'page', $request->page?:1);
         return $admins;
     }
 
@@ -81,8 +83,13 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        // var_dump($id);
         $admin = Admin::findOrFail($id);
+        if($admin->is_super == 1) {
+            return response(['message' => '不能删除超级管理员'], 422);
+        }
+
+        $res = $admin->delete();
+        return $res ? response(['message' => '删除成功'], 200) : response(['message' => '删除失败'], 422);
     }
 
     /**

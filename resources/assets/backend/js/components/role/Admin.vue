@@ -38,11 +38,12 @@
     <!-- 操作按钮 -->
     <el-button-group class="table-button-group">
       <el-button @click="handleCreate()" type="primary" size="mini" icon="el-icon-plus">新 增</el-button>
-      <el-button type="primary" size="mini" icon="el-icon-download">导 出</el-button>
+      <el-button @click="hanldeExport()" type="primary" size="mini" icon="el-icon-download">导 出</el-button>
     </el-button-group>
 
     <!-- 数据 -->
 		<el-table
+      v-loading.lock="loading"
 			style="width:100%"
 			:data="tableData"
 			stripe
@@ -60,10 +61,12 @@
 			<el-table-column
 				prop="name"
 				label="姓名"
+        width="150"
 			></el-table-column>
 			<el-table-column
 				prop="email"
 				label="邮箱"
+        width="200"
 			></el-table-column>
 			<el-table-column
 				prop="is_super"
@@ -115,18 +118,18 @@
             :value="item.value">
           </el-option>
         </el-select>
-        <el-button>确定</el-button>
+        <el-button @click="hanldeBatch()">确定</el-button>
       </div>
       <!-- 分页 -->
       <el-pagination
         class="table-pagination"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="1"
-        :page-sizes="[10, 20, 50, 100, 200, 300]"
-        :page-size="10"
+        :current-page="page.current_page"
+        :page-sizes="[1, 10, 20, 50, 100, 200, 300]"
+        :page-size="page.per_page"
         layout="total, sizes, prev, pager, next"
-        :total="5"
+        :total="page.total"
         background>
       </el-pagination>
     </div>
@@ -135,6 +138,9 @@
 
 <script>
 	export default {
+    beforeMount: function() {
+      this.getTableData(1)
+    },
 		data() {
 			return {
         loading: false,
@@ -148,60 +154,20 @@
         },
 				tableData: [
 					{
-						id: 1,
-						email: "aa@ss.com",
-						name: "姓名",
-						is_super: 1,
-						is_active: 1,
-						created_at: "",
-						updated_at: ""
-					},
-					{
-						id: 2,
-						email: "aa@ss.com",
-						name: "姓名",
-						is_super: 0,
-						is_active: 0,
-						created_at: "",
-						updated_at: ""
-					},
-					{
-						id: 3,
-						email: "aa@ss.com",
-						name: "姓名",
-						is_super: 0,
-						is_active: 1,
-						created_at: "",
-						updated_at: ""
-					},
-					{
-						id: 4,
-						email: "aa@ss.com",
-						name: "姓名",
-						is_super: 0,
-						is_active: 0,
-						created_at: "",
-						updated_at: ""
-					},
-					{
-						id: 5,
-						email: "aa@ss.com",
-						name: "姓名",
-						is_super: 0,
-						is_active: 1,
-						created_at: "",
-						updated_at: ""
-					},
-					{
-						id: 6,
-						email: "aa@ss.com",
-						name: "姓名",
-						is_super: 0,
-						is_active: 0,
+						id: "",
+						email: "",
+						name: "",
+						is_super: "",
+						is_active: "",
 						created_at: "",
 						updated_at: ""
 					}
 				],
+        page: {
+          total: 0,
+          per_page: 10,
+          current_page: 1
+        },
         batchOptions: [
           {
             value: "disabled",
@@ -252,12 +218,43 @@
 			},
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
+        this.$data.page.per_page = val;
+        this.getTableData(this.$data.page.current_page, val)
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+        this.$data.page.current_page = val;
+        this.getTableData(val)
       },
       handleSearch: function(formName) {
-
+        this.$alert('功能尚未完善');
+      },
+      hanldeBatch: function() {
+        this.$alert('功能尚未完善');
+      },
+      hanldeExport: function() {
+        this.$alert('功能尚未完善');
+      },
+      getTableData: function(page, perPage) {
+        this.$data.loading = true;
+        // 获取列表数据
+        axios.get('/backend/admin', {
+          params: {
+            perpage: perPage || this.$data.page.per_page || 10,
+            page: page || this.$data.page.current_page + 1 || 1,
+          }
+        })
+        .then(res => {
+          this.$data.tableData = res.data.data;
+          this.$data.page.total = parseInt(res.data.total);
+          this.$data.page.per_page = parseInt(res.data.per_page);
+          this.$data.page.current_page = parseInt(res.data.current_page);
+          this.$data.loading = false;
+        })
+        .catch(error => {
+          this.$message.error(error.message);
+          this.$data.loading = false;
+        })
       }
 		}
 	}
