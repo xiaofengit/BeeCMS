@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend\Role;
 use App\Http\Controllers\BackendController as Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Admin;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller

@@ -8,8 +8,8 @@
                 <i class="el-icon-document"></i>
                 <span>内容管理</span>
             </template>
-            <el-menu-item index="1-1"><a href="#">文档分类</a></el-menu-item>
-            <el-menu-item index="1-2"><a href="#">文档管理</a></el-menu-item>
+            <el-menu-item index="4"><a href="#">文档分类</a></el-menu-item>
+            <el-menu-item index="5"><a href="#">文档管理</a></el-menu-item>
             <el-menu-item index="1-3"><a href="#">广告管理</a></el-menu-item>
         </el-submenu>
         <el-submenu index="2">
@@ -18,7 +18,7 @@
                 <span>权限管理</span>
             </template>
             <el-menu-item index="2-1"><router-link to="/admin">管理员</router-link></el-menu-item>
-            <el-menu-item index="2-2"><a href="#">管理员组</a></el-menu-item>
+            <el-menu-item index="2-2"><router-link to="/permission">管理员组</router-link></el-menu-item>
         </el-submenu>
         <el-submenu index="3">
             <template slot="title">

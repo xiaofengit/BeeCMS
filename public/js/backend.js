@@ -76416,6 +76416,10 @@ var app = new Vue({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_role_AdminCreate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_role_AdminCreate__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_role_AdminEdit__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_role_AdminEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_role_AdminEdit__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_role_PermissionIndex__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_role_PermissionIndex___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_role_PermissionIndex__);
+
+
 
 
 
@@ -76443,7 +76447,7 @@ var routes = [{
   component: __WEBPACK_IMPORTED_MODULE_4__components_Infomation___default.a
 }, {
   path: '/admin',
-  name: 'admin',
+  name: 'admin-index',
   component: __WEBPACK_IMPORTED_MODULE_5__components_role_Admin___default.a
 }, {
   path: '/admin/create',
@@ -76453,6 +76457,10 @@ var routes = [{
   path: '/admin/edit/:id',
   name: 'admin-edit',
   component: __WEBPACK_IMPORTED_MODULE_7__components_role_AdminEdit___default.a
+}, {
+  path: '/permission',
+  name: 'permission-index',
+  component: __WEBPACK_IMPORTED_MODULE_8__components_role_PermissionIndex___default.a
 }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
@@ -81160,11 +81168,11 @@ var render = function() {
             _c("span", [_vm._v("内容管理")])
           ]),
           _vm._v(" "),
-          _c("el-menu-item", { attrs: { index: "1-1" } }, [
+          _c("el-menu-item", { attrs: { index: "4" } }, [
             _c("a", { attrs: { href: "#" } }, [_vm._v("文档分类")])
           ]),
           _vm._v(" "),
-          _c("el-menu-item", { attrs: { index: "1-2" } }, [
+          _c("el-menu-item", { attrs: { index: "5" } }, [
             _c("a", { attrs: { href: "#" } }, [_vm._v("文档管理")])
           ]),
           _vm._v(" "),
@@ -81194,9 +81202,16 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("el-menu-item", { attrs: { index: "2-2" } }, [
-            _c("a", { attrs: { href: "#" } }, [_vm._v("管理员组")])
-          ])
+          _c(
+            "el-menu-item",
+            { attrs: { index: "2-2" } },
+            [
+              _c("router-link", { attrs: { to: "/permission" } }, [
+                _vm._v("管理员组")
+              ])
+            ],
+            1
+          )
         ],
         2
       ),
@@ -81230,6 +81245,698 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-53d4cc88", module.exports)
   }
 }
+
+/***/ }),
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(18)
+/* script */
+var __vue_script__ = __webpack_require__(225)
+/* template */
+var __vue_template__ = __webpack_require__(224)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\backend\\js\\components\\role\\PermissionIndex.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-98ca5748", Component.options)
+  } else {
+    hotAPI.reload("data-v-98ca5748", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-breadcrumb",
+        { attrs: { "separator-class": "el-icon-arrow-right" } },
+        [
+          _c(
+            "el-breadcrumb-item",
+            [
+              _c("router-link", { attrs: { to: "/admin" } }, [
+                _vm._v("权限管理")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("el-breadcrumb-item", [_vm._v("管理员组")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form",
+        {
+          ref: "searchForm",
+          staticClass: "search-form-inline",
+          attrs: { model: _vm.search, inline: true, rules: _vm.searchRules }
+        },
+        [
+          _c(
+            "el-form-item",
+            { staticClass: "input", attrs: { prop: "name", label: "姓名" } },
+            [
+              _c("el-input", {
+                attrs: { type: "input", placeholder: "请输入姓名" },
+                model: {
+                  value: _vm.search.name,
+                  callback: function($$v) {
+                    _vm.$set(_vm.search, "name", $$v)
+                  },
+                  expression: "search.name"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { staticClass: "input", attrs: { prop: "email", label: "邮箱" } },
+            [
+              _c("el-input", {
+                attrs: { type: "input", placeholder: "请输入邮箱" },
+                model: {
+                  value: _vm.search.email,
+                  callback: function($$v) {
+                    _vm.$set(_vm.search, "email", $$v)
+                  },
+                  expression: "search.email"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { prop: "is_active", label: "状态" } },
+            [
+              _c(
+                "el-select",
+                {
+                  model: {
+                    value: _vm.search.is_active,
+                    callback: function($$v) {
+                      _vm.$set(_vm.search, "is_active", $$v)
+                    },
+                    expression: "search.is_active"
+                  }
+                },
+                [
+                  _c("el-option", { attrs: { label: "全部", value: "-1" } }),
+                  _vm._v(" "),
+                  _c("el-option", { attrs: { label: "启用", value: "1" } }),
+                  _vm._v(" "),
+                  _c("el-option", { attrs: { label: "禁用", value: "0" } })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            {
+              staticClass: "input",
+              attrs: { prop: "created_at", label: "创建时间" }
+            },
+            [
+              _c("el-date-picker", {
+                attrs: {
+                  type: "datetimerange",
+                  "range-separator": "至",
+                  "start-placeholder": "开始日期",
+                  "end-placeholder": "结束日期"
+                },
+                model: {
+                  value: _vm.search.created_at,
+                  callback: function($$v) {
+                    _vm.$set(_vm.search, "created_at", $$v)
+                  },
+                  expression: "search.created_at"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [
+              _c(
+                "el-button",
+                {
+                  directives: [
+                    {
+                      name: "loading",
+                      rawName: "v-loading.lock",
+                      value: _vm.loading,
+                      expression: "loading",
+                      modifiers: { lock: true }
+                    }
+                  ],
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.handleSearch("searchForm")
+                    }
+                  }
+                },
+                [_vm._v("搜 索")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-button-group",
+        { staticClass: "table-button-group" },
+        [
+          _c(
+            "el-button",
+            {
+              attrs: { type: "primary", size: "mini", icon: "el-icon-plus" },
+              on: {
+                click: function($event) {
+                  _vm.handleCreate()
+                }
+              }
+            },
+            [_vm._v("新 增")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              attrs: {
+                type: "primary",
+                size: "mini",
+                icon: "el-icon-download"
+              },
+              on: {
+                click: function($event) {
+                  _vm.hanldeExport()
+                }
+              }
+            },
+            [_vm._v("导 出")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-table",
+        {
+          directives: [
+            {
+              name: "loading",
+              rawName: "v-loading.lock",
+              value: _vm.loading,
+              expression: "loading",
+              modifiers: { lock: true }
+            }
+          ],
+          staticClass: "data-table",
+          staticStyle: { width: "100%" },
+          attrs: { data: _vm.tableData, stripe: "", border: "" }
+        },
+        [
+          _c("el-table-column", { attrs: { type: "selection" } }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "id", label: "ID", width: "50" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "name", label: "姓名", width: "150" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "email", label: "邮箱", width: "200" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: {
+              prop: "is_super",
+              label: "超级管理员",
+              formatter: _vm.formatSuper
+            }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: {
+              prop: "is_active",
+              label: "状态",
+              formatter: _vm.formatState
+            }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "created_at", label: "创建时间" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "updated_at", label: "更新时间" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { label: "操作", fixed: "right", "min-width": "150" },
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(scope) {
+                  return [
+                    _c(
+                      "el-button",
+                      {
+                        attrs: { size: "mini" },
+                        on: {
+                          click: function($event) {
+                            _vm.hanldeEdit(scope.$index, scope.row)
+                          }
+                        }
+                      },
+                      [_vm._v("编辑")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "el-button",
+                      {
+                        attrs: {
+                          size: "mini",
+                          type: "danger",
+                          disabled: scope.row.is_super == 1 ? true : false
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.hanldeDelete(scope.$index, scope.row)
+                          }
+                        }
+                      },
+                      [_vm._v("删除")]
+                    )
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "data-table-footer" },
+        [
+          _c(
+            "div",
+            { staticClass: "table-batch" },
+            [
+              _c(
+                "el-select",
+                {
+                  staticStyle: { width: "110px" },
+                  attrs: { placeholder: "批量操作", size: "medium" },
+                  model: {
+                    value: _vm.batchSelected,
+                    callback: function($$v) {
+                      _vm.batchSelected = $$v
+                    },
+                    expression: "batchSelected"
+                  }
+                },
+                _vm._l(_vm.batchOptions, function(item) {
+                  return _c("el-option", {
+                    key: item.value,
+                    attrs: { label: item.label, value: item.value }
+                  })
+                })
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.hanldeBatch()
+                    }
+                  }
+                },
+                [_vm._v("确定")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("el-pagination", {
+            staticClass: "table-pagination",
+            attrs: {
+              "current-page": _vm.page.current_page,
+              "page-sizes": [1, 10, 20, 50, 100, 200, 300],
+              "page-size": _vm.page.per_page,
+              layout: "total, sizes, prev, pager, next",
+              total: _vm.page.total,
+              background: ""
+            },
+            on: {
+              "size-change": _vm.handleSizeChange,
+              "current-change": _vm.handleCurrentChange
+            }
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-98ca5748", module.exports)
+  }
+}
+
+/***/ }),
+/* 225 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  beforeMount: function beforeMount() {
+    this.getTableData(1);
+  },
+  data: function data() {
+    return {
+      loading: false,
+      search: {
+        name: "",
+        email: "",
+        created_at: ""
+      },
+      searchRules: {
+        email: { type: "email", message: "请输入正确的邮箱", trigger: "blur" }
+      },
+      tableData: [{
+        id: "",
+        email: "",
+        name: "",
+        is_super: "",
+        is_active: "",
+        created_at: "",
+        updated_at: ""
+      }],
+      page: {
+        total: 0,
+        per_page: 10,
+        current_page: 1
+      },
+      batchOptions: [{
+        value: "disabled",
+        label: "禁用"
+      }, {
+        value: "enable",
+        label: "启用"
+      }],
+      batchSelected: ''
+    };
+  },
+
+  methods: {
+    formatSuper: function formatSuper(row, column, cellValue, index) {
+      return cellValue == 1 ? "是" : "否";
+    },
+    formatState: function formatState(row, column, cellValue, index) {
+      return cellValue == 1 ? "激活" : "禁用";
+    },
+    hanldeEdit: function hanldeEdit(index, row) {
+      console.log(index, row);
+      this.$router.push('/admin/edit/' + row.id);
+    },
+    handleCreate: function handleCreate() {
+      this.$router.push('/admin/create');
+    },
+    hanldeDelete: function hanldeDelete(index, row) {
+      var _this = this;
+
+      this.$confirm("此操作将永久删除该记录，是否继续？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonTextt: "取消",
+        type: 'warning'
+      }).then(function () {
+        // 确认删除
+        axios.delete('/backend/admin/' + row.id).then(function (res) {
+          _this.tableData.splice(index, 1);
+          _this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(function (error) {
+          _this.$message.error(error.message);
+        });
+      });
+    },
+    handleSizeChange: function handleSizeChange(val) {
+      console.log("\u6BCF\u9875 " + val + " \u6761");
+      this.$data.page.per_page = val;
+      this.getTableData(this.$data.page.current_page, val);
+    },
+    handleCurrentChange: function handleCurrentChange(val) {
+      console.log("\u5F53\u524D\u9875: " + val);
+      this.$data.page.current_page = val;
+      this.getTableData(val);
+    },
+
+    handleSearch: function handleSearch(formName) {
+      this.$alert('功能尚未完善');
+    },
+    hanldeBatch: function hanldeBatch() {
+      this.$alert('功能尚未完善');
+    },
+    hanldeExport: function hanldeExport() {
+      this.$alert('功能尚未完善');
+    },
+    getTableData: function getTableData(page, perPage) {
+      var _this2 = this;
+
+      this.$data.loading = true;
+      // 获取列表数据
+      axios.get('/backend/admin', {
+        params: {
+          perpage: perPage || this.$data.page.per_page || 10,
+          page: page || this.$data.page.current_page + 1 || 1
+        }
+      }).then(function (res) {
+        _this2.$data.tableData = res.data.data;
+        _this2.$data.page.total = parseInt(res.data.total);
+        _this2.$data.page.per_page = parseInt(res.data.per_page);
+        _this2.$data.page.current_page = parseInt(res.data.current_page);
+        _this2.$data.loading = false;
+      }).catch(function (error) {
+        _this2.$message.error(error.message);
+        _this2.$data.loading = false;
+      });
+    }
+  }
+});
 
 /***/ })
 /******/ ]);

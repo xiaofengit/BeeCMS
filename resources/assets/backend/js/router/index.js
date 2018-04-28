@@ -8,6 +8,8 @@ import Admin from '../components/role/Admin';
 import AdminCreate from '../components/role/AdminCreate';
 import AdminEdit from '../components/role/AdminEdit';
 
+import PermissionIndex from '../components/role/PermissionIndex';
+
 Vue.use(Router);
 
 // import Index from '../'
@@ -29,7 +31,7 @@ const routes = [
   },
   {
     path: '/admin',
-    name: 'admin',
+    name: 'admin-index',
     component: Admin
   },
   {
@@ -41,6 +43,11 @@ const routes = [
     path: '/admin/edit/:id',
     name: 'admin-edit',
     component: AdminEdit
+  },
+  {
+    path: '/permission',
+    name: 'permission-index',
+    component: PermissionIndex
   }
 ];
 
